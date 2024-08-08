@@ -1,0 +1,32 @@
+version: "3.8"
+
+services:
+    ui:
+        build:
+            context: ./services/ui
+            dockerfile: Dockerfile
+        volumes:
+            - "./services/ui:/usr/src/ui"
+            - "/usr/src/ui/node_modules"
+        ports:
+            - 3000:5173
+        depends_on:
+            - log
+            - simulation
+    simulation:
+        build:
+            context: ./services/simulation
+            dockerfile: Dockerfile
+        volumes:
+            - "./services/simulation:/usr/src/simulation"
+        ports:
+            - 5002:5000
+    log:
+        build:
+            context: ./services/log
+            dockerfile: Dockerfile
+        volumes:
+            - "./services/log:/usr/src/log"
+            - "/usr/src/log/node_modules"
+        ports:
+            - 5001:51234
