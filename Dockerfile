@@ -13,4 +13,7 @@ RUN yarn install
 # Bundle app source
 COPY . .
 
+# Expose Port
+EXPOSE 5173
+
 CMD [ "npm", "run", "dev" ]
